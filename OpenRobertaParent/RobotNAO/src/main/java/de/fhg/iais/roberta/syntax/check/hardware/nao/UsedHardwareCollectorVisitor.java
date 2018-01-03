@@ -44,8 +44,6 @@ import de.fhg.iais.roberta.syntax.sensor.nao.DetectedFaceInformation;
 import de.fhg.iais.roberta.syntax.sensor.nao.Dialog;
 import de.fhg.iais.roberta.syntax.sensor.nao.ElectricCurrent;
 import de.fhg.iais.roberta.syntax.sensor.nao.ForceSensor;
-import de.fhg.iais.roberta.syntax.sensor.nao.Gyrometer;
-import de.fhg.iais.roberta.syntax.sensor.nao.NaoGetSampleSensor;
 import de.fhg.iais.roberta.syntax.sensor.nao.NaoMark;
 import de.fhg.iais.roberta.syntax.sensor.nao.NaoMarkInformation;
 import de.fhg.iais.roberta.syntax.sensor.nao.RecognizeWord;
@@ -194,11 +192,6 @@ public class UsedHardwareCollectorVisitor extends RobotUsedHardwareCollectorVisi
     }
 
     @Override
-    public Void visitGyrometer(Gyrometer<Void> gyrometer) {
-        return null;
-    }
-
-    @Override
     public Void visitAccelerometer(Accelerometer<Void> accelerometer) {
         return null;
     }
@@ -246,12 +239,6 @@ public class UsedHardwareCollectorVisitor extends RobotUsedHardwareCollectorVisi
         this.usedSensors.add(new UsedSensor(null, SensorType.NAOFACE, null));
         return null;
     }*/
-
-    @Override
-    public Void visitNaoGetSampleSensor(NaoGetSampleSensor<Void> naoGetSampleSensor) {
-        naoGetSampleSensor.getSensor().visit(this);
-        return null;
-    }
 
     @Override
     public Void visitElectricCurrent(ElectricCurrent<Void> electricCurrent) {

@@ -35,8 +35,6 @@ import de.fhg.iais.roberta.syntax.sensor.nao.DetectedFaceInformation;
 import de.fhg.iais.roberta.syntax.sensor.nao.Dialog;
 import de.fhg.iais.roberta.syntax.sensor.nao.ElectricCurrent;
 import de.fhg.iais.roberta.syntax.sensor.nao.ForceSensor;
-import de.fhg.iais.roberta.syntax.sensor.nao.Gyrometer;
-import de.fhg.iais.roberta.syntax.sensor.nao.NaoGetSampleSensor;
 import de.fhg.iais.roberta.syntax.sensor.nao.NaoMark;
 import de.fhg.iais.roberta.syntax.sensor.nao.NaoMarkInformation;
 import de.fhg.iais.roberta.syntax.sensor.nao.RecognizeWord;
@@ -203,13 +201,6 @@ public interface NaoAstVisitor<V> extends AstVisitor<V>, AstActorSoundVisitor<V>
     V visitRastaDuration(RastaDuration<V> rastaDuration);
 
     /**
-     * visit a {@link Gyrometer}.
-     *
-     * @param gyrometer phrase to be visited
-     */
-    V visitGyrometer(Gyrometer<V> gyrometer);
-
-    /**
      * visit a {@link Accelerometer}.
      *
      * @param accelerometer phrase to be visited
@@ -264,8 +255,6 @@ public interface NaoAstVisitor<V> extends AstVisitor<V>, AstActorSoundVisitor<V>
      * @param DetectFace on phrase to be visited
      */
     V visitDetectFace(DetectFace<V> detectFace);
-
-    V visitNaoGetSampleSensor(NaoGetSampleSensor<V> naoGetSampleSensor);
 
     V visitElectricCurrent(ElectricCurrent<V> electricCurrent);
 

@@ -13,6 +13,7 @@ import de.fhg.iais.roberta.mode.action.Language;
 import de.fhg.iais.roberta.mode.action.TurnDirection;
 import de.fhg.iais.roberta.mode.action.nao.Camera;
 import de.fhg.iais.roberta.mode.general.IndexLocation;
+import de.fhg.iais.roberta.mode.sensor.GyroSensorMode;
 import de.fhg.iais.roberta.mode.sensor.UltrasonicSensorMode;
 import de.fhg.iais.roberta.syntax.BlockTypeContainer;
 import de.fhg.iais.roberta.syntax.BlockTypeContainer.BlockType;
@@ -83,11 +84,10 @@ import de.fhg.iais.roberta.syntax.sensor.nao.DetectedFaceInformation;
 import de.fhg.iais.roberta.syntax.sensor.nao.Dialog;
 import de.fhg.iais.roberta.syntax.sensor.nao.ElectricCurrent;
 import de.fhg.iais.roberta.syntax.sensor.nao.ForceSensor;
-import de.fhg.iais.roberta.syntax.sensor.nao.Gyrometer;
-import de.fhg.iais.roberta.syntax.sensor.nao.NaoGetSampleSensor;
 import de.fhg.iais.roberta.syntax.sensor.nao.NaoMark;
 import de.fhg.iais.roberta.syntax.sensor.nao.NaoMarkInformation;
 import de.fhg.iais.roberta.syntax.sensor.nao.RecognizeWord;
+import de.fhg.iais.roberta.syntax.sensor.generic.GyroSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.TouchSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.UltrasonicSensor;
 import de.fhg.iais.roberta.util.dbc.Assert;
@@ -1119,12 +1119,10 @@ public class PythonVisitor extends RobotPythonVisitor implements NaoAstVisitor<V
     	this.sb.append( "h.sonar()");
         return null;
     }
-
+    
     @Override
-    public Void visitGyrometer(Gyrometer<Void> gyrometer) {
-        this.sb.append("h.gyrometer(");
-        this.sb.append(gyrometer.getCoordinate().getPythonCode());
-        this.sb.append(")");
+    public Void visitGyroSensor(GyroSensor<Void> gyroSensor) {
+    	this.sb.append("h.gyrometer(" + gyroSensor.getPort().getValues()[0] + ")");
         return null;
     }
 
@@ -1221,11 +1219,6 @@ public class PythonVisitor extends RobotPythonVisitor implements NaoAstVisitor<V
     public Void visitDetectFace(DetectFace<Void> detectFace) {
         this.sb.append("faceRecognitionModule.detectFace()");
         return null;
-    }
-
-    @Override
-    public Void visitNaoGetSampleSensor(NaoGetSampleSensor<Void> sensorGetSample) {
-        return sensorGetSample.getSensor().visit(this);
     }
 
     @Override
