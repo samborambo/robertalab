@@ -21,8 +21,11 @@ public enum SensorPort implements ISensorPort {
     S10( "10" ),
     ANY( "3" ),
     BOTH( "3" ),
-    LEFT( "LEFT" ),
-    RIGHT( "RIGHT" );
+    LEFT( "left" ),
+    RIGHT( "right" ),
+    FRONT( "front" ),
+    MIDDLE( "middle" ),
+    REAR( "rear" );
 
     private final String[] values;
 

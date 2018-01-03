@@ -1109,8 +1109,8 @@ public class PythonVisitor extends RobotPythonVisitor implements NaoAstVisitor<V
     
     @Override
     public Void visitTouchSensor(TouchSensor<Void> touchSensor) {
-        this.sb.append("h.touchsensors(" + touchSensor.getMode() + ", ");
-        this.sb.append(touchSensor.getPort() + ")");
+        this.sb.append("h.touchsensors(" + touchSensor.getMode().getValues()[0] + ", ");
+        this.sb.append(touchSensor.getPort().getValues()[0] + ")");
         return null;
     }
 
