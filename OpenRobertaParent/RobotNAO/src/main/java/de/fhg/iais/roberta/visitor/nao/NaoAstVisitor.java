@@ -44,11 +44,12 @@ import de.fhg.iais.roberta.syntax.sensor.nao.Sonar;
 import de.fhg.iais.roberta.syntax.sensor.nao.Touchsensors;
 import de.fhg.iais.roberta.visitor.AstVisitor;
 import de.fhg.iais.roberta.visitor.actor.AstActorSoundVisitor;
+import de.fhg.iais.roberta.visitor.sensor.AstSensorsVisitor;
 
 /**
  * Interface to be used with the visitor pattern to traverse an AST (and generate code, e.g.).
  */
-public interface NaoAstVisitor<V> extends AstVisitor<V>, AstActorSoundVisitor<V> {
+public interface NaoAstVisitor<V> extends AstVisitor<V>, AstActorSoundVisitor<V>, AstSensorsVisitor<V> {
     /**
      * visit a {@link SetMode}.
      *

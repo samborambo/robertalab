@@ -20,7 +20,9 @@ public enum SensorPort implements ISensorPort {
     S9( "9" ),
     S10( "10" ),
     ANY( "3" ),
-    BOTH( "3" );
+    BOTH( "3" ),
+    LEFT( "LEFT" ),
+    RIGHT( "RIGHT" );
 
     private final String[] values;
 

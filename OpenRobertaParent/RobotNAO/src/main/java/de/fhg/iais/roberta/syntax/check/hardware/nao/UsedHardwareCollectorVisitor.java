@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import de.fhg.iais.roberta.components.Configuration;
 import de.fhg.iais.roberta.components.UsedSensor;
-import de.fhg.iais.roberta.components.nao.SensorType;
+import de.fhg.iais.roberta.components.SensorType;
 import de.fhg.iais.roberta.syntax.Phrase;
 import de.fhg.iais.roberta.syntax.action.nao.Animation;
 import de.fhg.iais.roberta.syntax.action.nao.ApplyPosture;
@@ -239,7 +239,7 @@ public class UsedHardwareCollectorVisitor extends RobotUsedHardwareCollectorVisi
         recordVideo.getVideoName().visit(this);
         return null;
     }
-
+/*
     @Override
     public Void visitLearnFace(LearnFace<Void> learnFace) {
         learnFace.getFaceName().visit(this);
@@ -258,7 +258,7 @@ public class UsedHardwareCollectorVisitor extends RobotUsedHardwareCollectorVisi
     public Void visitDetectFace(DetectFace<Void> detectFace) {
         this.usedSensors.add(new UsedSensor(null, SensorType.NAOFACE, null));
         return null;
-    }
+    }*/
 
     @Override
     public Void visitNaoGetSampleSensor(NaoGetSampleSensor<Void> naoGetSampleSensor) {
@@ -299,13 +299,13 @@ public class UsedHardwareCollectorVisitor extends RobotUsedHardwareCollectorVisi
     public Void visitColorHexString(ColorHexString<Void> colorHexString) {
         return null;
     }
-
+/*
     @Override
     public Void visitRecognizeWord(RecognizeWord<Void> recognizeWord) {
         recognizeWord.getVocabulary().visit(this);
         this.usedSensors.add(new UsedSensor(null, SensorType.NAOSPEECH, null));
         return null;
-    }
+    }*/
 
     @Override
     public Void visitNaoMarkInformation(NaoMarkInformation<Void> naoMarkInformation) {
@@ -313,12 +313,42 @@ public class UsedHardwareCollectorVisitor extends RobotUsedHardwareCollectorVisi
         this.usedSensors.add(new UsedSensor(null, SensorType.NAOMARK, null));
         return null;
     }
-
+/*
     @Override
     public Void visitDetecedFaceInformation(DetectedFaceInformation<Void> detectedFaceInformation) {
         detectedFaceInformation.getFaceName().visit(this);
         this.usedSensors.add(new UsedSensor(null, SensorType.NAOFACE, null));
         return null;
-    }
+    }*/
+
+	@Override
+	public Void visitLearnFace(LearnFace<Void> learnFace) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void visitForgetFace(ForgetFace<Void> forgetFace) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void visitDetectFace(DetectFace<Void> detectFace) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void visitRecognizeWord(RecognizeWord<Void> recognizeWord) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void visitDetecedFaceInformation(DetectedFaceInformation<Void> detectedFaceInformation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

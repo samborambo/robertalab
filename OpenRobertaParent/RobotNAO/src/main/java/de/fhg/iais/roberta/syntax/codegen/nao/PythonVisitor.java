@@ -6,7 +6,6 @@ import java.util.Set;
 
 import de.fhg.iais.roberta.components.UsedSensor;
 import de.fhg.iais.roberta.components.nao.NAOConfiguration;
-import de.fhg.iais.roberta.components.nao.SensorType;
 import de.fhg.iais.roberta.inter.mode.action.ILanguage;
 import de.fhg.iais.roberta.inter.mode.general.IMode;
 import de.fhg.iais.roberta.mode.action.DriveDirection;
@@ -90,10 +89,12 @@ import de.fhg.iais.roberta.syntax.sensor.nao.NaoMarkInformation;
 import de.fhg.iais.roberta.syntax.sensor.nao.RecognizeWord;
 import de.fhg.iais.roberta.syntax.sensor.nao.Sonar;
 import de.fhg.iais.roberta.syntax.sensor.nao.Touchsensors;
+import de.fhg.iais.roberta.syntax.sensor.generic.TouchSensor;
 import de.fhg.iais.roberta.util.dbc.Assert;
 import de.fhg.iais.roberta.util.dbc.DbcException;
 import de.fhg.iais.roberta.visitor.AstVisitor;
 import de.fhg.iais.roberta.visitor.nao.NaoAstVisitor;
+import de.fhg.iais.roberta.visitor.sensor.AstSensorsVisitor;
 
 /**
  * This class is implementing {@link AstVisitor}. All methods are implemented and they append a human-readable Python code representation of a phrase to a
@@ -1105,6 +1106,13 @@ public class PythonVisitor extends RobotPythonVisitor implements NaoAstVisitor<V
         this.sb.append(")");
         return null;
     }
+    
+    @Override
+    public Void visitTouchSensor(TouchSensor<Void> touchSensor) {
+        this.sb.append("h.touchsensors(" + touchSensor.getMode() + ", ");
+        this.sb.append(touchSensor.getPort() + ")");
+        return null;
+    }
 
     @Override
     public Void visitTouchsensors(Touchsensors<Void> touchsensors) {
@@ -1329,7 +1337,7 @@ public class PythonVisitor extends RobotPythonVisitor implements NaoAstVisitor<V
         this.sb.append("from roberta import Hal\n");
         this.sb.append("from roberta import BlocklyMethods\n");
         this.sb.append("h = Hal()\n");
-        this.generateSensors();
+        //this.generateSensors();
 
         if ( !this.loopsLabels.isEmpty() ) {
             nlIndent();
@@ -1350,7 +1358,7 @@ public class PythonVisitor extends RobotPythonVisitor implements NaoAstVisitor<V
         this.sb.append(INDENT).append("except Exception as e:\n");
         this.sb.append(INDENT).append(INDENT).append("h.say(\"Error!\" + str(e))\n");
         this.sb.append(INDENT).append("finally:\n");
-        this.removeSensors();
+        //this.removeSensors();
 
         this.sb.append(INDENT).append(INDENT).append("h.myBroker.shutdown()");
 
@@ -1375,7 +1383,7 @@ public class PythonVisitor extends RobotPythonVisitor implements NaoAstVisitor<V
         this.sb.append(")");
         return null;
     }
-
+    /*
     private void generateSensors() {
         for ( UsedSensor usedSensor : this.usedSensors ) {
             switch ( (SensorType) usedSensor.getType() ) {
@@ -1466,6 +1474,30 @@ public class PythonVisitor extends RobotPythonVisitor implements NaoAstVisitor<V
         detectedFaceInformation.getFaceName().visit(this);
         this.sb.append(")");
         return null;
-    }
+    }*/
+
+	@Override
+	public Void visitColorHexString(ColorHexString<Void> colorHexString) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void visitRecognizeWord(RecognizeWord<Void> recognizeWord) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void visitNaoMarkInformation(NaoMarkInformation<Void> naoMarkInformation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void visitDetecedFaceInformation(DetectedFaceInformation<Void> detectedFaceInformation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
