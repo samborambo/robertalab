@@ -13,6 +13,7 @@ import de.fhg.iais.roberta.mode.action.Language;
 import de.fhg.iais.roberta.mode.action.TurnDirection;
 import de.fhg.iais.roberta.mode.action.nao.Camera;
 import de.fhg.iais.roberta.mode.general.IndexLocation;
+import de.fhg.iais.roberta.mode.sensor.UltrasonicSensorMode;
 import de.fhg.iais.roberta.syntax.BlockTypeContainer;
 import de.fhg.iais.roberta.syntax.BlockTypeContainer.BlockType;
 import de.fhg.iais.roberta.syntax.Phrase;
@@ -87,9 +88,8 @@ import de.fhg.iais.roberta.syntax.sensor.nao.NaoGetSampleSensor;
 import de.fhg.iais.roberta.syntax.sensor.nao.NaoMark;
 import de.fhg.iais.roberta.syntax.sensor.nao.NaoMarkInformation;
 import de.fhg.iais.roberta.syntax.sensor.nao.RecognizeWord;
-import de.fhg.iais.roberta.syntax.sensor.nao.Sonar;
-import de.fhg.iais.roberta.syntax.sensor.nao.Touchsensors;
 import de.fhg.iais.roberta.syntax.sensor.generic.TouchSensor;
+import de.fhg.iais.roberta.syntax.sensor.generic.UltrasonicSensor;
 import de.fhg.iais.roberta.util.dbc.Assert;
 import de.fhg.iais.roberta.util.dbc.DbcException;
 import de.fhg.iais.roberta.visitor.AstVisitor;
@@ -1113,20 +1113,10 @@ public class PythonVisitor extends RobotPythonVisitor implements NaoAstVisitor<V
         this.sb.append(touchSensor.getPort().getValues()[0] + ")");
         return null;
     }
-
+    
     @Override
-    public Void visitTouchsensors(Touchsensors<Void> touchsensors) {
-        this.sb.append("h.touchsensors(");
-        this.sb.append("\"" + touchsensors.getSensor().getPythonCode() + "\"");
-        this.sb.append(", ");
-        this.sb.append("\"" + touchsensors.getSide().getPythonCode() + "\"");
-        this.sb.append(")");
-        return null;
-    }
-
-    @Override
-    public Void visitSonar(Sonar<Void> sonar) {
-        this.sb.append("h.ultrasonic()");
+    public Void visitUltrasonicSensor(UltrasonicSensor<Void> ultrasonicSensor) {
+    	this.sb.append( "h.sonar()");
         return null;
     }
 
@@ -1138,13 +1128,14 @@ public class PythonVisitor extends RobotPythonVisitor implements NaoAstVisitor<V
         return null;
     }
 
+    /*
     @Override
     public Void visitDialog(Dialog<Void> dialog) {
         this.sb.append("h.dialog(");
         this.sb.append(dialog.getPhrase().getPythonCode());
         this.sb.append(")");
         return null;
-    }
+    }*/
 
     @Override
     public Void visitAccelerometer(Accelerometer<Void> accelerometer) {
@@ -1496,6 +1487,12 @@ public class PythonVisitor extends RobotPythonVisitor implements NaoAstVisitor<V
 
 	@Override
 	public Void visitDetecedFaceInformation(DetectedFaceInformation<Void> detectedFaceInformation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Void visitDialog(Dialog<Void> dialog) {
 		// TODO Auto-generated method stub
 		return null;
 	}

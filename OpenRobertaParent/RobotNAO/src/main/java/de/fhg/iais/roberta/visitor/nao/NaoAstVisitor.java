@@ -40,8 +40,6 @@ import de.fhg.iais.roberta.syntax.sensor.nao.NaoGetSampleSensor;
 import de.fhg.iais.roberta.syntax.sensor.nao.NaoMark;
 import de.fhg.iais.roberta.syntax.sensor.nao.NaoMarkInformation;
 import de.fhg.iais.roberta.syntax.sensor.nao.RecognizeWord;
-import de.fhg.iais.roberta.syntax.sensor.nao.Sonar;
-import de.fhg.iais.roberta.syntax.sensor.nao.Touchsensors;
 import de.fhg.iais.roberta.visitor.AstVisitor;
 import de.fhg.iais.roberta.visitor.actor.AstActorSoundVisitor;
 import de.fhg.iais.roberta.visitor.sensor.AstSensorsVisitor;
@@ -203,20 +201,6 @@ public interface NaoAstVisitor<V> extends AstVisitor<V>, AstActorSoundVisitor<V>
      * @param rast duration phrase to be visited
      */
     V visitRastaDuration(RastaDuration<V> rastaDuration);
-
-    /**
-     * visit a {@link Touchsensors}.
-     *
-     * @param rast duration phrase to be visited
-     */
-    V visitTouchsensors(Touchsensors<V> touchsensors);
-
-    /**
-     * visit a {@link Sonar}.
-     *
-     * @param sonar phrase to be visited
-     */
-    V visitSonar(Sonar<V> sonar);
 
     /**
      * visit a {@link Gyrometer}.

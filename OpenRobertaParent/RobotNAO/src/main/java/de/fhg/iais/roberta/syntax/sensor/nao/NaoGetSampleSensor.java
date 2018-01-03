@@ -13,6 +13,7 @@ import de.fhg.iais.roberta.syntax.BlocklyComment;
 import de.fhg.iais.roberta.syntax.BlocklyConstants;
 import de.fhg.iais.roberta.syntax.Phrase;
 import de.fhg.iais.roberta.syntax.sensor.Sensor;
+import de.fhg.iais.roberta.syntax.sensor.generic.TouchSensor;
 import de.fhg.iais.roberta.transformer.ExprParam;
 import de.fhg.iais.roberta.transformer.Jaxb2AstTransformer;
 import de.fhg.iais.roberta.transformer.JaxbTransformerHelper;
@@ -81,18 +82,18 @@ public class NaoGetSampleSensor<V> extends Sensor<V> {
             case NAO_TOUCHSENSOR:
                 String sensor = helper.extractField(fields, BlocklyConstants.POSITION);
                 String sensorSide = helper.extractField(fields, BlocklyConstants.SIDE);
-                Sensor<V> touchSensor =
-                    Touchsensors.make(Touchsensors.SensorType.valueOf(sensor), Touchsensors.TouchSide.valueOf(sensorSide), blockProperties, blockComment);
-                return NaoGetSampleSensor.make(sensorType, touchSensor);
+                //Sensor<V> touchSensor =
+                    //TouchSensor.make(TouchSensor.SensorType.valueOf(sensor), Touchsensors.TouchSide.valueOf(sensorSide), blockProperties, blockComment);
+                //return NaoGetSampleSensor.make(sensorType, touchSensor);
             case NAO_DETECTFACE:
                 Sensor<V> detectFace = DetectFace.make(blockProperties, blockComment);
                 return NaoGetSampleSensor.make(sensorType, detectFace);
             case NAO_NAOMARK:
                 Sensor<V> markSensor = NaoMark.make(blockProperties, blockComment);
                 return NaoGetSampleSensor.make(sensorType, markSensor);
-            case NAO_SONAR:
-                Sensor<V> sonar = Sonar.make(blockProperties, blockComment);
-                return NaoGetSampleSensor.make(sensorType, sonar);
+            //case NAO_SONAR:
+              //  Sensor<V> sonar = Sonar.make(blockProperties, blockComment);
+                //return NaoGetSampleSensor.make(sensorType, sonar);
             case NAO_GYROMETER:
                 coordinate = helper.extractField(fields, BlocklyConstants.COORDINATE);
                 Sensor<V> gyroSensor = Gyrometer.make(Gyrometer.Coordinate.valueOf(coordinate), blockProperties, blockComment);
@@ -132,10 +133,10 @@ public class NaoGetSampleSensor<V> extends Sensor<V> {
 
         JaxbTransformerHelper.addField(jaxbDestination, BlocklyConstants.SENSORTYPE, getSensorType().name());
         switch ( this.sensorType ) {
-            case NAO_TOUCHSENSOR:
-                JaxbTransformerHelper.addField(jaxbDestination, BlocklyConstants.POSITION, ((Touchsensors<V>) this.sensor).getSensor().toString());
-                JaxbTransformerHelper.addField(jaxbDestination, BlocklyConstants.SIDE, ((Touchsensors<V>) this.sensor).getSide().toString());
-                break;
+            //case NAO_TOUCHSENSOR:
+              //  JaxbTransformerHelper.addField(jaxbDestination, BlocklyConstants.POSITION, ((Touchsensors<V>) this.sensor).getSensor().toString());
+                //JaxbTransformerHelper.addField(jaxbDestination, BlocklyConstants.SIDE, ((Touchsensors<V>) this.sensor).getSide().toString());
+                //break;
             case NAO_GYROMETER:
                 JaxbTransformerHelper.addField(jaxbDestination, BlocklyConstants.COORDINATE, ((Gyrometer<V>) this.sensor).getCoordinate().toString());
                 break;
