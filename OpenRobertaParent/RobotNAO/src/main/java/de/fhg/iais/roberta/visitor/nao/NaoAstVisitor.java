@@ -29,7 +29,6 @@ import de.fhg.iais.roberta.syntax.action.nao.WalkDistance;
 import de.fhg.iais.roberta.syntax.action.nao.WalkTo;
 import de.fhg.iais.roberta.syntax.lang.expr.nao.ColorHexString;
 //import de.fhg.iais.roberta.syntax.expr.nao.LedColor;
-import de.fhg.iais.roberta.syntax.sensor.nao.Accelerometer;
 import de.fhg.iais.roberta.syntax.sensor.nao.DetectFace;
 import de.fhg.iais.roberta.syntax.sensor.nao.DetectedFaceInformation;
 import de.fhg.iais.roberta.syntax.sensor.nao.Dialog;
@@ -199,13 +198,6 @@ public interface NaoAstVisitor<V> extends AstVisitor<V>, AstActorSoundVisitor<V>
      * @param rast duration phrase to be visited
      */
     V visitRastaDuration(RastaDuration<V> rastaDuration);
-
-    /**
-     * visit a {@link Accelerometer}.
-     *
-     * @param accelerometer phrase to be visited
-     */
-    V visitAccelerometer(Accelerometer<V> accelerometer);
 
     /**
      * visit a {@link ForceSensor}.
