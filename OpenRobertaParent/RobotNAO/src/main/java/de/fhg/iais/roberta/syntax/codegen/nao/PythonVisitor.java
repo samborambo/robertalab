@@ -79,12 +79,12 @@ import de.fhg.iais.roberta.syntax.lang.stmt.WaitTimeStmt;
 import de.fhg.iais.roberta.syntax.sensor.nao.DetectFace;
 import de.fhg.iais.roberta.syntax.sensor.nao.DetectedFaceInformation;
 import de.fhg.iais.roberta.syntax.sensor.nao.Dialog;
-import de.fhg.iais.roberta.syntax.sensor.nao.ElectricCurrent;
 import de.fhg.iais.roberta.syntax.sensor.generic.ForceSensor;
 import de.fhg.iais.roberta.syntax.sensor.nao.NaoMark;
 import de.fhg.iais.roberta.syntax.sensor.nao.NaoMarkInformation;
 import de.fhg.iais.roberta.syntax.sensor.nao.RecognizeWord;
 import de.fhg.iais.roberta.syntax.sensor.generic.GyroSensor;
+import de.fhg.iais.roberta.syntax.sensor.generic.MotorSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.AccelerometerSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.TouchSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.UltrasonicSensor;
@@ -1220,90 +1220,9 @@ public class PythonVisitor extends RobotPythonVisitor implements NaoAstVisitor<V
     }
 
     @Override
-    public Void visitElectricCurrent(ElectricCurrent<Void> electricCurrent) {
+    public Void visitMotorSensor(MotorSensor<Void> motorSensor) {
         this.sb.append("h.getElectricCurrent(");
-        switch ( electricCurrent.getJoint() ) {
-            case HEADYAW:
-                this.sb.append("\"HeadYaw\"");
-                break;
-            case HEADPITCH:
-                this.sb.append("\"HeadPitch\"");
-                break;
-            case LSHOULDERPITCH:
-                this.sb.append("\"LShoulderPitch\"");
-                break;
-            case LSHOULDERROLL:
-                this.sb.append("\"LShoulderRoll\"");
-                break;
-            case LELBOWYAW:
-                this.sb.append("\"LElbowYaw\"");
-                break;
-            case LELBOWROLL:
-                this.sb.append("\"LElbowRoll\"");
-                break;
-            case LWRISTYAW:
-                this.sb.append("\"LWristYaw\"");
-                break;
-            case LHAND:
-                this.sb.append("\"LHand\"");
-                break;
-            case LHIPYAWPITCH:
-                this.sb.append("\"LHipYawPitch\"");
-                break;
-            case LHIPROLL:
-                this.sb.append("\"LHipRoll\"");
-                break;
-            case LHIPPITCH:
-                this.sb.append("\"LHipPitch\"");
-                break;
-            case LKNEEPITCH:
-                this.sb.append("\"LKneePitch\"");
-                break;
-            case LANKLEPITCH:
-                this.sb.append("\"LAnklePitch\"");
-                break;
-            case RANKLEROLL:
-                this.sb.append("\"RAnkleRoll\"");
-                break;
-            case RHIPYAWPITCH:
-                this.sb.append("\"RHipYawPitch\"");
-                break;
-            case RHIPROLL:
-                this.sb.append("\"RHipRoll\"");
-                break;
-            case RHIPITCH:
-                this.sb.append("\"RHipPitch\"");
-                break;
-            case RKNEEPITCH:
-                this.sb.append("\"RKneePitch\"");
-                break;
-            case RANKLEPITCH:
-                this.sb.append("\"RAnklePitch\"");
-                break;
-            case RSHOULDERPITCH:
-                this.sb.append("\"RShoulderPitch\"");
-                break;
-            case RSHOULDERROLL:
-                this.sb.append("\"RShoulderRoll\"");
-                break;
-            case RELBOWYAW:
-                this.sb.append("\"RElbowYaw\"");
-                break;
-            case RELBOWROLL:
-                this.sb.append("\"RElbowRoll\"");
-                break;
-            case RWRISTYAW:
-                this.sb.append("\"RWristYaw\"");
-                break;
-            case RHAND:
-                this.sb.append("\"RHand\"");
-                break;
-            case LANKLEROLL:
-                this.sb.append("\"LAnkleRoll\"");
-                break;
-            default:
-                throw new DbcException("Invalide Joint!");
-        }
+        this.sb.append(motorSensor.getPort().getValues()[0]);
         this.sb.append(")");
         return null;
     }

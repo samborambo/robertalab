@@ -30,11 +30,11 @@ import de.fhg.iais.roberta.syntax.action.nao.WalkTo;
 import de.fhg.iais.roberta.syntax.lang.expr.nao.ColorHexString;
 import de.fhg.iais.roberta.syntax.sensor.generic.AccelerometerSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.ForceSensor;
+import de.fhg.iais.roberta.syntax.sensor.generic.MotorSensor;
 //import de.fhg.iais.roberta.syntax.expr.nao.LedColor;
 import de.fhg.iais.roberta.syntax.sensor.nao.DetectFace;
 import de.fhg.iais.roberta.syntax.sensor.nao.DetectedFaceInformation;
 import de.fhg.iais.roberta.syntax.sensor.nao.Dialog;
-import de.fhg.iais.roberta.syntax.sensor.nao.ElectricCurrent;
 import de.fhg.iais.roberta.syntax.sensor.nao.NaoMark;
 import de.fhg.iais.roberta.syntax.sensor.nao.NaoMarkInformation;
 import de.fhg.iais.roberta.syntax.sensor.nao.RecognizeWord;
@@ -66,6 +66,13 @@ public interface NaoAstVisitor<V> extends AstVisitor<V>, AstActorSoundVisitor<V>
      * @param mode phrase to be visited
      */
     V visitForceSensor(ForceSensor<V> forceSensor);
+    
+    /**
+     * visit a {@link MotorSensor}.
+     *
+     * @param mode phrase to be visited
+     */
+    V visitMotorSensor(MotorSensor<V> motorSensor);
 
     /**
      * visit a {@link ApplyPosture}.
@@ -91,7 +98,7 @@ public interface NaoAstVisitor<V> extends AstVisitor<V>, AstActorSoundVisitor<V>
     /**
      * visit a {@link MoveJoint}.
      *
-     * @param ElectricCurrent on phrase to be visited
+     * @param MoveJoint on phrase to be visited
      */
     V visitMoveJoint(MoveJoint<V> moveJoint);
 
@@ -133,7 +140,7 @@ public interface NaoAstVisitor<V> extends AstVisitor<V>, AstActorSoundVisitor<V>
     /**
      * visit a {@link MoveJoint}.
      *
-     * @param ElectricCurrent on phrase to be visited
+     * @param Animation on phrase to be visited
      */
     V visitAnimation(Animation<V> animation);
 
@@ -255,8 +262,6 @@ public interface NaoAstVisitor<V> extends AstVisitor<V>, AstActorSoundVisitor<V>
      * @param DetectFace on phrase to be visited
      */
     V visitDetectFace(DetectFace<V> detectFace);
-
-    V visitElectricCurrent(ElectricCurrent<V> electricCurrent);
 
     //V visitLedColor(LedColor<V> ledColor);
 

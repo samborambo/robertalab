@@ -39,11 +39,11 @@ import de.fhg.iais.roberta.syntax.check.hardware.RobotUsedHardwareCollectorVisit
 import de.fhg.iais.roberta.syntax.lang.expr.nao.ColorHexString;
 import de.fhg.iais.roberta.syntax.sensor.generic.AccelerometerSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.ForceSensor;
+import de.fhg.iais.roberta.syntax.sensor.generic.MotorSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.TemperatureSensor;
 import de.fhg.iais.roberta.syntax.sensor.nao.DetectFace;
 import de.fhg.iais.roberta.syntax.sensor.nao.DetectedFaceInformation;
 import de.fhg.iais.roberta.syntax.sensor.nao.Dialog;
-import de.fhg.iais.roberta.syntax.sensor.nao.ElectricCurrent;
 import de.fhg.iais.roberta.syntax.sensor.nao.NaoMark;
 import de.fhg.iais.roberta.syntax.sensor.nao.NaoMarkInformation;
 import de.fhg.iais.roberta.syntax.sensor.nao.RecognizeWord;
@@ -231,11 +231,6 @@ public class UsedHardwareCollectorVisitor extends RobotUsedHardwareCollectorVisi
     }*/
 
     @Override
-    public Void visitElectricCurrent(ElectricCurrent<Void> electricCurrent) {
-        return null;
-    }
-
-    @Override
     public Void visitSetIntensity(SetIntensity<Void> setIntensity) {
         setIntensity.getIntensity().visit(this);
         return null;
@@ -322,5 +317,10 @@ public class UsedHardwareCollectorVisitor extends RobotUsedHardwareCollectorVisi
 	public Void visitForceSensor(ForceSensor<Void> forceSensor) {
         return null;
     }
+	
+	public Void visitMotorSensor(MotorSensor<Void> motorSensor) {
+        return null;
+    }
+
 
 }

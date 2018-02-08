@@ -68,6 +68,7 @@ import de.fhg.iais.roberta.mode.sensor.GyroSensorMode;
 import de.fhg.iais.roberta.mode.sensor.IBirckKeyPressMode;
 import de.fhg.iais.roberta.mode.sensor.InfraredSensorMode;
 import de.fhg.iais.roberta.mode.sensor.LightSensorMode;
+import de.fhg.iais.roberta.mode.sensor.MotorSensorMode;
 import de.fhg.iais.roberta.mode.sensor.MotorTachoMode;
 import de.fhg.iais.roberta.mode.sensor.PinValue;
 import de.fhg.iais.roberta.mode.sensor.SensorPort;
@@ -376,6 +377,17 @@ public interface IRobotFactory {
      */
     default IForceSensorMode getForceSensorMode(String mode) {
         return IRobotFactory.getModeValue(mode, ForceSensorMode.class);
+    }
+    
+    /**
+     * Get a motor sensor mode from {@link IForceSensorMode} given string parameter. It is possible for one motor sensor mode to have multiple string mappings.
+     * Throws exception if the motor sensor mode does not exists.
+     *
+     * @param name of the motor sensor mode
+     * @return the motor sensor mode from the enum {@link IMotorSensorMode}
+     */
+    default IForceSensorMode getMotorSensorMode(String mode) {
+        return IRobotFactory.getModeValue(mode, MotorSensorMode.class);
     }
 
     /**

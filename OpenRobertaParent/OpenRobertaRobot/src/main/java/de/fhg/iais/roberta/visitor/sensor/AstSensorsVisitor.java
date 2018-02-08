@@ -11,6 +11,7 @@ import de.fhg.iais.roberta.syntax.sensor.generic.GetSampleSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.GyroSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.InfraredSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.LightSensor;
+import de.fhg.iais.roberta.syntax.sensor.generic.MotorSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.PinGetValueSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.PinTouchSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.SoundSensor;
@@ -84,6 +85,15 @@ public interface AstSensorsVisitor<V> extends AstVisitor<V> {
      */
     default V visitForceSensor(ForceSensor<V> forceSensor) {
         throw new DbcException("ForceSensor not implemented!");
+    }
+    
+    /**
+     * visit a {@link MotorSensor}.
+     *
+     * @param forceSensor to be visited
+     */
+    default V visitMotorSensor(MotorSensor<V> forceSensor) {
+        throw new DbcException("MotorSensor not implemented!");
     }
 
     /**
