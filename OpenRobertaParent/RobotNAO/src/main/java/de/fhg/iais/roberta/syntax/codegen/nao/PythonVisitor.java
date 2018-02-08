@@ -80,7 +80,7 @@ import de.fhg.iais.roberta.syntax.sensor.nao.DetectFace;
 import de.fhg.iais.roberta.syntax.sensor.nao.DetectedFaceInformation;
 import de.fhg.iais.roberta.syntax.sensor.nao.Dialog;
 import de.fhg.iais.roberta.syntax.sensor.nao.ElectricCurrent;
-import de.fhg.iais.roberta.syntax.sensor.nao.ForceSensor;
+import de.fhg.iais.roberta.syntax.sensor.generic.ForceSensor;
 import de.fhg.iais.roberta.syntax.sensor.nao.NaoMark;
 import de.fhg.iais.roberta.syntax.sensor.nao.NaoMarkInformation;
 import de.fhg.iais.roberta.syntax.sensor.nao.RecognizeWord;
@@ -92,12 +92,13 @@ import de.fhg.iais.roberta.util.dbc.Assert;
 import de.fhg.iais.roberta.util.dbc.DbcException;
 import de.fhg.iais.roberta.visitor.AstVisitor;
 import de.fhg.iais.roberta.visitor.nao.NaoAstVisitor;
+import de.fhg.iais.roberta.visitor.sensor.AstSensorsVisitor;
 
 /**
  * This class is implementing {@link AstVisitor}. All methods are implemented and they append a human-readable Python code representation of a phrase to a
  * StringBuilder. <b>This representation is correct Python code.</b> <br>
  */
-public class PythonVisitor extends RobotPythonVisitor implements NaoAstVisitor<Void> {
+public class PythonVisitor extends RobotPythonVisitor implements NaoAstVisitor<Void>,AstSensorsVisitor<Void> {
 
     protected Set<UsedSensor> usedSensors;
 
@@ -1143,7 +1144,7 @@ public class PythonVisitor extends RobotPythonVisitor implements NaoAstVisitor<V
     @Override
     public Void visitForceSensor(ForceSensor<Void> forceSensor) {
         this.sb.append("h.fsr(");
-        this.sb.append(forceSensor.getSide().getPythonCode());
+        this.sb.append(forceSensor.getPort().getValues()[0]);
         this.sb.append(")");
         return null;
     }

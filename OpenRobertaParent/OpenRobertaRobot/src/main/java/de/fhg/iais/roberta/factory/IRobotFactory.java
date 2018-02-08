@@ -27,6 +27,7 @@ import de.fhg.iais.roberta.inter.mode.sensor.IBrickKey;
 import de.fhg.iais.roberta.inter.mode.sensor.IColorSensorMode;
 import de.fhg.iais.roberta.inter.mode.sensor.ICompassSensorMode;
 import de.fhg.iais.roberta.inter.mode.sensor.ICoordinatesMode;
+import de.fhg.iais.roberta.inter.mode.sensor.IForceSensorMode;
 import de.fhg.iais.roberta.inter.mode.sensor.IGestureSensorMode;
 import de.fhg.iais.roberta.inter.mode.sensor.IGyroSensorMode;
 import de.fhg.iais.roberta.inter.mode.sensor.IInfraredSensorMode;
@@ -61,6 +62,7 @@ import de.fhg.iais.roberta.mode.sensor.BrickKey;
 import de.fhg.iais.roberta.mode.sensor.BrickKeyPressMode;
 import de.fhg.iais.roberta.mode.sensor.ColorSensorMode;
 import de.fhg.iais.roberta.mode.sensor.CompassSensorMode;
+import de.fhg.iais.roberta.mode.sensor.ForceSensorMode;
 import de.fhg.iais.roberta.mode.sensor.GestureSensorMode;
 import de.fhg.iais.roberta.mode.sensor.GyroSensorMode;
 import de.fhg.iais.roberta.mode.sensor.IBirckKeyPressMode;
@@ -363,6 +365,17 @@ public interface IRobotFactory {
      */
     default IGyroSensorMode getGyroSensorMode(String mode) {
         return IRobotFactory.getModeValue(mode, GyroSensorMode.class);
+    }
+    
+    /**
+     * Get a force sensor mode from {@link IForceSensorMode} given string parameter. It is possible for one force sensor mode to have multiple string mappings.
+     * Throws exception if the force sensor mode does not exists.
+     *
+     * @param name of the force sensor mode
+     * @return the force sensor mode from the enum {@link IForceSensorMode}
+     */
+    default IForceSensorMode getForceSensorMode(String mode) {
+        return IRobotFactory.getModeValue(mode, ForceSensorMode.class);
     }
 
     /**

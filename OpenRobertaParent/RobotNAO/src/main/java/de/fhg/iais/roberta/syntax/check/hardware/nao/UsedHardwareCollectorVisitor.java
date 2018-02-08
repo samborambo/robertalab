@@ -42,7 +42,6 @@ import de.fhg.iais.roberta.syntax.sensor.nao.DetectFace;
 import de.fhg.iais.roberta.syntax.sensor.nao.DetectedFaceInformation;
 import de.fhg.iais.roberta.syntax.sensor.nao.Dialog;
 import de.fhg.iais.roberta.syntax.sensor.nao.ElectricCurrent;
-import de.fhg.iais.roberta.syntax.sensor.nao.ForceSensor;
 import de.fhg.iais.roberta.syntax.sensor.nao.NaoMark;
 import de.fhg.iais.roberta.syntax.sensor.nao.NaoMarkInformation;
 import de.fhg.iais.roberta.syntax.sensor.nao.RecognizeWord;
@@ -187,11 +186,6 @@ public class UsedHardwareCollectorVisitor extends RobotUsedHardwareCollectorVisi
     @Override
     public Void visitRastaDuration(RastaDuration<Void> rastaDuration) {
         rastaDuration.getDuration().visit(this);
-        return null;
-    }
-    
-    @Override
-    public Void visitForceSensor(ForceSensor<Void> forceSensor) {
         return null;
     }
 

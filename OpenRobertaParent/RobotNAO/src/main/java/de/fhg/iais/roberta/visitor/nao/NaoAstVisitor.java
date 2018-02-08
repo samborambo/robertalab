@@ -33,7 +33,6 @@ import de.fhg.iais.roberta.syntax.sensor.nao.DetectFace;
 import de.fhg.iais.roberta.syntax.sensor.nao.DetectedFaceInformation;
 import de.fhg.iais.roberta.syntax.sensor.nao.Dialog;
 import de.fhg.iais.roberta.syntax.sensor.nao.ElectricCurrent;
-import de.fhg.iais.roberta.syntax.sensor.nao.ForceSensor;
 import de.fhg.iais.roberta.syntax.sensor.nao.NaoMark;
 import de.fhg.iais.roberta.syntax.sensor.nao.NaoMarkInformation;
 import de.fhg.iais.roberta.syntax.sensor.nao.RecognizeWord;
@@ -198,13 +197,6 @@ public interface NaoAstVisitor<V> extends AstVisitor<V>, AstActorSoundVisitor<V>
      * @param rast duration phrase to be visited
      */
     V visitRastaDuration(RastaDuration<V> rastaDuration);
-
-    /**
-     * visit a {@link ForceSensor}.
-     *
-     * @param force sensor phrase to be visited
-     */
-    V visitForceSensor(ForceSensor<V> forceSensor);
 
     /**
      * visit a {@link NaoMark}.
