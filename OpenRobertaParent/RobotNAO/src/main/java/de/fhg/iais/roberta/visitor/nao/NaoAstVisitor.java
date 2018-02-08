@@ -28,6 +28,8 @@ import de.fhg.iais.roberta.syntax.action.nao.WalkAsync;
 import de.fhg.iais.roberta.syntax.action.nao.WalkDistance;
 import de.fhg.iais.roberta.syntax.action.nao.WalkTo;
 import de.fhg.iais.roberta.syntax.lang.expr.nao.ColorHexString;
+import de.fhg.iais.roberta.syntax.sensor.generic.AccelerometerSensor;
+import de.fhg.iais.roberta.syntax.sensor.generic.ForceSensor;
 //import de.fhg.iais.roberta.syntax.expr.nao.LedColor;
 import de.fhg.iais.roberta.syntax.sensor.nao.DetectFace;
 import de.fhg.iais.roberta.syntax.sensor.nao.DetectedFaceInformation;
@@ -50,6 +52,20 @@ public interface NaoAstVisitor<V> extends AstVisitor<V>, AstActorSoundVisitor<V>
      * @param mode phrase to be visited
      */
     V visitSetMode(SetMode<V> mode);
+    
+    /**
+     * visit a {@link AccelerometerSensor}.
+     *
+     * @param mode phrase to be visited
+     */
+    V visitAccelerometer(AccelerometerSensor<V> accelerometerSensor);
+    
+    /**
+     * visit a {@link ForceSensor}.
+     *
+     * @param mode phrase to be visited
+     */
+    V visitForceSensor(ForceSensor<V> forceSensor);
 
     /**
      * visit a {@link ApplyPosture}.

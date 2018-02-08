@@ -37,6 +37,8 @@ import de.fhg.iais.roberta.syntax.action.sound.SayTextAction;
 import de.fhg.iais.roberta.syntax.action.sound.SetLanguageAction;
 import de.fhg.iais.roberta.syntax.check.hardware.RobotUsedHardwareCollectorVisitor;
 import de.fhg.iais.roberta.syntax.lang.expr.nao.ColorHexString;
+import de.fhg.iais.roberta.syntax.sensor.generic.AccelerometerSensor;
+import de.fhg.iais.roberta.syntax.sensor.generic.ForceSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.TemperatureSensor;
 import de.fhg.iais.roberta.syntax.sensor.nao.DetectFace;
 import de.fhg.iais.roberta.syntax.sensor.nao.DetectedFaceInformation;
@@ -312,5 +314,13 @@ public class UsedHardwareCollectorVisitor extends RobotUsedHardwareCollectorVisi
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public Void visitAccelerometer(AccelerometerSensor<Void> accelerometer) {
+        return null;
+    }
+	
+	public Void visitForceSensor(ForceSensor<Void> forceSensor) {
+        return null;
+    }
 
 }
