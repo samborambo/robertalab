@@ -78,12 +78,12 @@ public class RobotModeFactoryTest {
 
     @Test
     public void getActorPortFromString() {
-        Assert.assertEquals(this.factory.getActorPort("A"), ActorPort.A);
+        Assert.assertEquals(this.factory.getActorPort("A"), new ActorPort("A", "A"));
     }
 
     @Test
     public void getActorPortByAlternativeName() {
-        Assert.assertEquals(this.factory.getActorPort("MB"), ActorPort.B);
+        Assert.assertEquals(this.factory.getActorPort("MB"), new ActorPort("B", "B"));
     }
 
     @Test(expected = DbcException.class)

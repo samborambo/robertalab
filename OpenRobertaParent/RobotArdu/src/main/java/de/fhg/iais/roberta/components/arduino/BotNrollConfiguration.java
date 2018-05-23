@@ -11,7 +11,6 @@ import de.fhg.iais.roberta.components.Sensor;
 import de.fhg.iais.roberta.inter.mode.action.IActorPort;
 import de.fhg.iais.roberta.inter.mode.sensor.ISensorPort;
 import de.fhg.iais.roberta.mode.action.MotorSide;
-import de.fhg.iais.roberta.mode.actors.arduino.botnroll.ActorPort;
 import de.fhg.iais.roberta.util.Pair;
 import de.fhg.iais.roberta.util.dbc.DbcException;
 

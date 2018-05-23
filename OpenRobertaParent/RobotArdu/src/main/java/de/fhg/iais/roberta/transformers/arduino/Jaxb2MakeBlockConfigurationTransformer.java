@@ -158,6 +158,7 @@ public class Jaxb2MakeBlockConfigurationTransformer {
                     default:
                         throw new DbcException("Invalide motor type!" + value.getBlock().getType());
                 }
+                System.out.println(actors);
             }
         }
     }

@@ -421,7 +421,7 @@ public class JavaVisitor extends RobotJavaVisitor implements AstSensorsVisitor<V
             } else {
                 methodName = isRegulated ? "hal.turnOnRegulatedMotor(" : "hal.turnOnUnregulatedMotor(";
             }
-            this.sb.append(methodName + getEnumCode(motorOnAction.getPort()) + ", ");
+            this.sb.append(methodName + "ActorPort." + motorOnAction.getPort().getPortNumber() + ", ");
             motorOnAction.getParam().getSpeed().visit(this);
             if ( duration ) {
                 this.sb.append(", " + getEnumCode(motorOnAction.getDurationMode()));
@@ -438,7 +438,7 @@ public class JavaVisitor extends RobotJavaVisitor implements AstSensorsVisitor<V
         if ( isActorOnPort(motorSetPowerAction.getPort()) ) {
             boolean isRegulated = this.brickConfiguration.isMotorRegulated(motorSetPowerAction.getPort());
             String methodName = isRegulated ? "hal.setRegulatedMotorSpeed(" : "hal.setUnregulatedMotorSpeed(";
-            this.sb.append(methodName + getEnumCode(motorSetPowerAction.getPort()) + ", ");
+            this.sb.append(methodName + "ActorPort." + motorSetPowerAction.getPort().getPortNumber() + ", ");
             motorSetPowerAction.getPower().visit(this);
             this.sb.append(");");
         }
@@ -450,7 +450,7 @@ public class JavaVisitor extends RobotJavaVisitor implements AstSensorsVisitor<V
         if ( isActorOnPort(motorGetPowerAction.getPort()) ) {
             boolean isRegulated = this.brickConfiguration.isMotorRegulated(motorGetPowerAction.getPort());
             String methodName = isRegulated ? "hal.getRegulatedMotorSpeed(" : "hal.getUnregulatedMotorSpeed(";
-            this.sb.append(methodName + getEnumCode(motorGetPowerAction.getPort()) + ")");
+            this.sb.append(methodName + "ActorPort." + motorGetPowerAction.getPort().getPortNumber() + ")");
         }
         return null;
     }
@@ -460,7 +460,7 @@ public class JavaVisitor extends RobotJavaVisitor implements AstSensorsVisitor<V
         if ( isActorOnPort(motorStopAction.getPort()) ) {
             boolean isRegulated = this.brickConfiguration.isMotorRegulated(motorStopAction.getPort());
             String methodName = isRegulated ? "hal.stopRegulatedMotor(" : "hal.stopUnregulatedMotor(";
-            this.sb.append(methodName + getEnumCode(motorStopAction.getPort()) + ", " + getEnumCode(motorStopAction.getMode()) + ");");
+            this.sb.append(methodName + "ActorPort." + motorStopAction.getPort().getPortNumber() + ", " + getEnumCode(motorStopAction.getMode()) + ");");
         }
         return null;
     }
@@ -562,10 +562,10 @@ public class JavaVisitor extends RobotJavaVisitor implements AstSensorsVisitor<V
         boolean isRegulated = this.brickConfiguration.isMotorRegulated(encoderMotorPort);
         if ( encoderSensor.getMode() == MotorTachoMode.RESET ) {
             String methodName = isRegulated ? "hal.resetRegulatedMotorTacho(" : "hal.resetUnregulatedMotorTacho(";
-            this.sb.append(methodName + getEnumCode(encoderMotorPort) + ");");
+            this.sb.append(methodName + "ActorPort." + encoderMotorPort.getPortNumber() + ");");
         } else {
             String methodName = isRegulated ? "hal.getRegulatedMotorTachoValue(" : "hal.getUnregulatedMotorTachoValue(";
-            this.sb.append(methodName + getEnumCode(encoderMotorPort) + ", " + getEnumCode(encoderSensor.getMode()) + ")");
+            this.sb.append(methodName + "ActorPort." + encoderMotorPort.getPortNumber() + ", " + getEnumCode(encoderSensor.getMode()) + ")");
         }
         return null;
     }
@@ -1061,7 +1061,7 @@ public class JavaVisitor extends RobotJavaVisitor implements AstSensorsVisitor<V
         for ( Map.Entry<ISensorPort, Sensor> entry : this.brickConfiguration.getSensors().entrySet() ) {
             sb.append(INDENT).append(INDENT).append(INDENT);
             sb.append("    .addSensor(");
-            sb.append(getEnumCode(entry.getKey())).append(", ");
+            sb.append("SensorPort." + entry.getKey()).append(", ");
             sb.append(generateRegenerateSensor(entry.getValue()));
             sb.append(")\n");
         }
@@ -1071,7 +1071,7 @@ public class JavaVisitor extends RobotJavaVisitor implements AstSensorsVisitor<V
         for ( Map.Entry<IActorPort, Actor> entry : this.brickConfiguration.getActors().entrySet() ) {
             sb.append(INDENT).append(INDENT).append(INDENT);
             sb.append("    .addActor(");
-            sb.append(getEnumCode(entry.getKey())).append(", ");
+            sb.append("ActorPort." + entry.getKey().getPortNumber()).append(", ");
             sb.append(generateRegenerateActor(entry.getValue()));
             sb.append(")\n");
         }

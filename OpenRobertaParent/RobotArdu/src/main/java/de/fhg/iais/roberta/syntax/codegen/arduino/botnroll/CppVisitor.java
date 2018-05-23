@@ -7,11 +7,11 @@ import de.fhg.iais.roberta.components.SensorType;
 import de.fhg.iais.roberta.components.UsedSensor;
 import de.fhg.iais.roberta.components.arduino.BotNrollConfiguration;
 import de.fhg.iais.roberta.inter.mode.sensor.IColorSensorMode;
+import de.fhg.iais.roberta.mode.action.ActorPort;
 import de.fhg.iais.roberta.mode.action.BlinkMode;
 import de.fhg.iais.roberta.mode.action.DriveDirection;
 import de.fhg.iais.roberta.mode.action.MotorStopMode;
 import de.fhg.iais.roberta.mode.action.TurnDirection;
-import de.fhg.iais.roberta.mode.actors.arduino.botnroll.ActorPort;
 import de.fhg.iais.roberta.mode.sensor.ColorSensorMode;
 import de.fhg.iais.roberta.mode.sensor.InfraredSensorMode;
 import de.fhg.iais.roberta.syntax.Phrase;
@@ -221,16 +221,16 @@ public class CppVisitor extends ArduinoVisitor implements ArduinoAstVisitor<Void
     public Void visitMotorOnAction(MotorOnAction<Void> motorOnAction) {
         final boolean reverse =
             (this.brickConfiguration.getActorOnPort(this.brickConfiguration.getLeftMotorPort()).getRotationDirection() == DriveDirection.BACKWARD)
-                || (this.brickConfiguration.getActorOnPort(ActorPort.A).getRotationDirection() == DriveDirection.BACKWARD);
+                || (this.brickConfiguration.getActorOnPort(new ActorPort("A", "A")).getRotationDirection() == DriveDirection.BACKWARD);
         String methodName;
         String port = null;
         final boolean isDuration = motorOnAction.getParam().getDuration() != null;
-        final boolean isServo = (motorOnAction.getPort() == ActorPort.A) || (motorOnAction.getPort() == ActorPort.D);
+        final boolean isServo = (motorOnAction.getPort().toString().equals("A")) || (motorOnAction.getPort().toString().equals("D"));
         if ( isServo ) {
-            methodName = motorOnAction.getPort() == ActorPort.A ? "one.servo1(" : "one.servo2(";
+            methodName = motorOnAction.getPort().toString().equals("A") ? "one.servo1(" : "one.servo2(";
         } else {
             methodName = isDuration ? "bnr.move1mTime(" : "one.move1m(";
-            port = motorOnAction.getPort() == ActorPort.B ? "1" : "2";
+            port = motorOnAction.getPort().toString().equals("B") ? "1" : "2";
         }
         this.sb.append(methodName);
         if ( !isServo ) {
@@ -260,7 +260,7 @@ public class CppVisitor extends ArduinoVisitor implements ArduinoAstVisitor<Void
 
     @Override
     public Void visitMotorStopAction(MotorStopAction<Void> motorStopAction) {
-        String port = motorStopAction.getPort() == ActorPort.B ? "1" : "2";
+        String port = motorStopAction.getPort().toString().equals("B") ? "1" : "2";
         if ( motorStopAction.getMode() == MotorStopMode.FLOAT ) {
             this.sb.append("one.stop1m(");
 
@@ -274,13 +274,15 @@ public class CppVisitor extends ArduinoVisitor implements ArduinoAstVisitor<Void
     @Override
     public Void visitDriveAction(DriveAction<Void> driveAction) {
         //this.sb.append(this.brickConfiguration.generateText("q") + "\n");
+        System.out.println("this.brickConfiguration.getLeftMotorPort()).isRegulated()");
+        System.out.println(this.brickConfiguration.getLeftMotorPort());
         final boolean isRegulatedDrive =
             this.brickConfiguration.getActorOnPort(this.brickConfiguration.getLeftMotorPort()).isRegulated()
-                || this.brickConfiguration.getActorOnPort(ActorPort.A).isRegulated();
+                || this.brickConfiguration.getActorOnPort(new ActorPort("A", "A")).isRegulated();
         final boolean isDuration = driveAction.getParam().getDuration() != null;
         final boolean reverse =
             (this.brickConfiguration.getActorOnPort(this.brickConfiguration.getLeftMotorPort()).getRotationDirection() == DriveDirection.BACKWARD)
-                || (this.brickConfiguration.getActorOnPort(ActorPort.A).getRotationDirection() == DriveDirection.BACKWARD);
+                || (this.brickConfiguration.getActorOnPort(new ActorPort("A", "A")).getRotationDirection() == DriveDirection.BACKWARD);
         final boolean localReverse = driveAction.getDirection() == DriveDirection.BACKWARD;
         String methodName;
         String sign = "";
@@ -314,11 +316,11 @@ public class CppVisitor extends ArduinoVisitor implements ArduinoAstVisitor<Void
     public Void visitCurveAction(CurveAction<Void> curveAction) {
         final boolean isRegulatedDrive =
             this.brickConfiguration.getActorOnPort(this.brickConfiguration.getLeftMotorPort()).isRegulated()
-                || this.brickConfiguration.getActorOnPort(ActorPort.A).isRegulated();
+                || this.brickConfiguration.getActorOnPort(new ActorPort("A", "A")).isRegulated();
         final boolean isDuration = curveAction.getParamLeft().getDuration() != null;
         final boolean reverse =
             (this.brickConfiguration.getActorOnPort(this.brickConfiguration.getLeftMotorPort()).getRotationDirection() == DriveDirection.BACKWARD)
-                || (this.brickConfiguration.getActorOnPort(ActorPort.A).getRotationDirection() == DriveDirection.BACKWARD);
+                || (this.brickConfiguration.getActorOnPort(new ActorPort("A", "A")).getRotationDirection() == DriveDirection.BACKWARD);
         final boolean localReverse = curveAction.getDirection() == DriveDirection.BACKWARD;
         String methodName;
         String sign = "";

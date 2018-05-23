@@ -26,8 +26,8 @@ public class ProgramConfigurationCompatabilityTest {
     public void ev3program_configuration_compatibility_4_errors() throws Exception {
         EV3Configuration.Builder builder = new EV3Configuration.Builder();
         builder.setTrackWidth(17).setWheelDiameter(5.6);
-        builder.addActor(ActorPort.A, new Actor(ActorType.MEDIUM, true, DriveDirection.FOREWARD, MotorSide.LEFT)).addActor(
-            ActorPort.B,
+        builder.addActor(new ActorPort("A", "A"), new Actor(ActorType.MEDIUM, true, DriveDirection.FOREWARD, MotorSide.LEFT)).addActor(
+            new ActorPort("B", "B"),
             new Actor(ActorType.LARGE, true, DriveDirection.FOREWARD, MotorSide.RIGHT));
         builder.addSensor(new SensorPort("1", "S1"), new Sensor(SensorType.TOUCH)).addSensor(new SensorPort("2", "S2"), new Sensor(SensorType.ULTRASONIC));
 
@@ -45,8 +45,8 @@ public class ProgramConfigurationCompatabilityTest {
     public void ev3program_configuration_compatibility_0_errors() throws Exception {
         EV3Configuration.Builder builder = new EV3Configuration.Builder();
         builder.setTrackWidth(17).setWheelDiameter(5.6);
-        builder.addActor(ActorPort.A, new Actor(ActorType.MEDIUM, true, DriveDirection.FOREWARD, MotorSide.LEFT)).addActor(
-            ActorPort.B,
+        builder.addActor(new ActorPort("A", "A"), new Actor(ActorType.MEDIUM, true, DriveDirection.FOREWARD, MotorSide.LEFT)).addActor(
+            new ActorPort("B", "B"),
             new Actor(ActorType.LARGE, true, DriveDirection.FOREWARD, MotorSide.RIGHT));
         builder
             .addSensor(new SensorPort("1", "S1"), new Sensor(SensorType.TOUCH))

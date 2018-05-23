@@ -182,8 +182,8 @@ public class CppVisitor extends ArduinoVisitor implements MbotAstVisitor<Void> {
     @Override
     public Void visitMotorOnAction(MotorOnAction<Void> motorOnAction) {
         final MotorDuration<Void> duration = motorOnAction.getParam().getDuration();
-        this.sb.append(motorOnAction.getPort().getValues()[1]).append(".run(");
-        if ( this.brickConfiguration.getRightMotorPort().equals(motorOnAction.getPort()) ) {
+        this.sb.append(motorOnAction.getPort().getPortNumber()).append(".run(");
+        if ( this.brickConfiguration.getRightMotorPort().getPortName().equals(motorOnAction.getPort().getPortName()) ) {
             this.sb.append("-1*");
         }
         this.sb.append("(");
@@ -195,7 +195,7 @@ public class CppVisitor extends ArduinoVisitor implements MbotAstVisitor<Void> {
             motorOnAction.getDurationValue().visit(this);
             this.sb.append(");");
             nlIndent();
-            this.sb.append(motorOnAction.getPort().getValues()[1]).append(".stop();");
+            this.sb.append(motorOnAction.getPort().getPortName()).append(".stop();");
         }
         return null;
     }
@@ -212,7 +212,7 @@ public class CppVisitor extends ArduinoVisitor implements MbotAstVisitor<Void> {
 
     @Override
     public Void visitMotorStopAction(MotorStopAction<Void> motorStopAction) {
-        this.sb.append(motorStopAction.getPort().getValues()[1]).append(".stop();");
+        this.sb.append(motorStopAction.getPort().getPortName()).append(".stop();");
         return null;
     }
 
@@ -279,6 +279,8 @@ public class CppVisitor extends ArduinoVisitor implements MbotAstVisitor<Void> {
                 break;
             case RIGHT:
                 this.sb.append("lineFinder" + lightSensor.getPort().getPortNumber() + ".readSensors" + "()&1");
+                break;
+            default:
                 break;
 
         }
@@ -401,6 +403,8 @@ public class CppVisitor extends ArduinoVisitor implements MbotAstVisitor<Void> {
                     nlIndent();
                     this.sb.append("myGyro" + usedSensor.getPort().getPortNumber() + ".begin();");
                     break;
+                default:
+                    break;
             }
         }
         nlIndent();
@@ -421,6 +425,8 @@ public class CppVisitor extends ArduinoVisitor implements MbotAstVisitor<Void> {
                 case TEMPERATURE:
                     nlIndent();
                     this.sb.append("myTemp" + usedSensor.getPort().getPortNumber() + ".update();");
+                    break;
+                default:
                     break;
             }
         }
@@ -511,21 +517,21 @@ public class CppVisitor extends ArduinoVisitor implements MbotAstVisitor<Void> {
                     this.sb.append("MeRGBLed rgbled_7(7, 7==7?2:4);\n");
                     break;
                 case GEARED_MOTOR:
-                    this.sb.append("MeDCMotor " + usedActor.getPort().getValues()[1] + "(" + usedActor.getPort().getValues()[0] + ");\n");
+                    this.sb.append("MeDCMotor " + usedActor.getPort().getPortNumber() + "(" + usedActor.getPort().getPortName() + ");\n");
                     break;
                 case DIFFERENTIAL_DRIVE:
                     this.sb.append(
                         "MeDrive myDrive("
-                            + this.brickConfiguration.getLeftMotorPort().getValues()[0]
+                            + this.brickConfiguration.getLeftMotorPort().getPortName()
                             + ", "
-                            + this.brickConfiguration.getRightMotorPort().getValues()[0]
+                            + this.brickConfiguration.getRightMotorPort().getPortName()
                             + ");\n");
                     break;
                 case EXTERNAL_LED:
-                    this.sb.append("MeRGBLed rgbled_" + usedActor.getPort().getValues()[0] + "(" + usedActor.getPort().getValues()[0] + ", 4);\n");
+                    this.sb.append("MeRGBLed rgbled_" + usedActor.getPort().getPortNumber() + "(" + usedActor.getPort().getPortNumber() + ", 4);\n");
                     break;
                 case LED_MATRIX:
-                    this.sb.append("MeLEDMatrix myLEDMatrix_" + usedActor.getPort().getValues()[0] + "(" + usedActor.getPort().getValues()[0] + ");\n");
+                    this.sb.append("MeLEDMatrix myLEDMatrix_" + usedActor.getPort().getPortNumber() + "(" + usedActor.getPort().getPortNumber() + ");\n");
                     break;
                 case BUZZER:
                     this.sb.append("MeBuzzer buzzer;\n");
